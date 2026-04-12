@@ -1,3 +1,6 @@
+# Ver Releases para descargar el instalador 
+
+
 # AppCleanerPro (NovaDash Design)
 
 AppCleanerPro es una solución integral de optimización, limpieza y seguridad para sistemas operativos Windows, desarrollada sobre el framework .NET 10. La aplicación combina herramientas de diagnóstico avanzado con una interfaz moderna basada en NovaDash Design para ofrecer un control total sobre el rendimiento y la privacidad del equipo.
