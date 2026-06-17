@@ -1,7 +1,7 @@
 # See Releases to download the installer
 ## https://github.com/zbrau/Cleaner-App-Made-in-C-/releases
 
-# AppCleanerPro (NovaDash Design)
+# AppCleaner
 
 AppCleanerPro is a comprehensive optimization, cleaning, and security solution for Windows operating systems, built on the .NET 10 framework. The application combines diagnostic tools, system cleanup utilities, and advanced management features to keep your PC running fast and secure.
 
