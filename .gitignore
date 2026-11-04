@@ -3,6 +3,8 @@ bin/
 obj/
 [Bb]in/
 [Oo]bj/
+publish/
+dist/
 
 ## Visual Studio, Rider & VS Code
 .vs/
