@@ -1,0 +1,106 @@
+<UserControl x:Class="AppCleanerPro.Views.RamBoosterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock FontSize="28" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,20">
+            <InlineUIContainer><Image Source="pack://application:,,,/Assets/Icons/fi-rr-memory.png" Width="18" Height="18" VerticalAlignment="Center"/></InlineUIContainer>
+            <Run Text=" RAM Booster"/>
+        </TextBlock>
+
+        <!-- Stats + Actions Row -->
+        <Grid Grid.Row="1" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Total RAM -->
+            <Border Grid.Column="0" Margin="0,0,10,0" CornerRadius="12" Background="{DynamicResource BgCard}" BorderBrush="{DynamicResource BorderCard}" BorderThickness="1" Padding="20,16">
+                <StackPanel>
+                    <TextBlock Text="RAM TOTAL" Foreground="{DynamicResource TextSecond}" FontFamily="Segoe UI" FontSize="10" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="TotalRamText" Text="—" Foreground="{DynamicResource AccentBlue}" FontFamily="Segoe UI" FontSize="28" FontWeight="Bold" Margin="0,6,0,2"/>
+                    <TextBlock Text="Memoria instalada" Foreground="{DynamicResource TextMuted}" FontFamily="Segoe UI" FontSize="11"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Used RAM -->
+            <Border Grid.Column="1" Margin="0,0,10,0" CornerRadius="12" Background="{DynamicResource BgCard}" BorderBrush="{DynamicResource BorderCard}" BorderThickness="1" Padding="20,16">
+                <StackPanel>
+                    <TextBlock Text="EN USO" Foreground="{DynamicResource TextSecond}" FontFamily="Segoe UI" FontSize="10" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="UsedRamText" Text="—" Foreground="{DynamicResource AccentRed}" FontFamily="Segoe UI" FontSize="28" FontWeight="Bold" Margin="0,6,0,2"/>
+                    <TextBlock x:Name="UsedPctText" Text="—" Foreground="{DynamicResource TextMuted}" FontFamily="Segoe UI" FontSize="11"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Free RAM -->
+            <Border Grid.Column="2" Margin="0,0,10,0" CornerRadius="12" Background="{DynamicResource BgCard}" BorderBrush="{DynamicResource BorderCard}" BorderThickness="1" Padding="20,16">
+                <StackPanel>
+                    <TextBlock Text="LIBRE" Foreground="{DynamicResource TextSecond}" FontFamily="Segoe UI" FontSize="10" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="FreeRamText" Text="—" Foreground="{DynamicResource AccentGreen}" FontFamily="Segoe UI" FontSize="28" FontWeight="Bold" Margin="0,6,0,2"/>
+                    <TextBlock x:Name="FreePctText" Text="—" Foreground="{DynamicResource TextMuted}" FontFamily="Segoe UI" FontSize="11"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Boost Button -->
+            <Border Grid.Column="3" CornerRadius="12" Padding="4">
+                <Button x:Name="BoostBtn" Click="BoostBtn_Click" Width="140" Height="80" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Bd" CornerRadius="10" Padding="16,12">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#1D4ED8" Offset="0"/>
+                                        <GradientStop Color="#7C3AED" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border.Effect>
+                                    <DropShadowEffect Color="#4060CC" BlurRadius="20" ShadowDepth="0" Opacity="0.6"/>
+                                </Border.Effect>
+                                <StackPanel HorizontalAlignment="Center">
+                                    <Image Source="pack://application:,,,/Assets/Icons/fi-rr-memory.png" Width="28" Height="28" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    <TextBlock Text="BOOST RAM" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Opacity" Value="0.85"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Border>
+        </Grid>
+
+        <!-- Realtime RAM Graph -->
+        <Border Grid.Row="2" CornerRadius="12" Background="{DynamicResource BgCard}" BorderBrush="{DynamicResource BorderCard}" BorderThickness="1" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                    <TextBlock Text="Uso de RAM en tiempo real" Foreground="{DynamicResource TextPrimary}" FontFamily="Segoe UI" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="LivePctBadge" Text="0%" Foreground="{DynamicResource AccentBlue}" FontFamily="Segoe UI" FontSize="14" FontWeight="Bold" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="BoostResultText" Text="" Foreground="{DynamicResource AccentGreen}" FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold" Margin="20,0,0,0" VerticalAlignment="Center" Visibility="Collapsed"/>
+                </StackPanel>
+
+                <!-- Canvas graph -->
+                <Canvas x:Name="RamGraph" Grid.Row="1" Background="Transparent" ClipToBounds="True">
+                    <!-- Grid lines drawn in code -->
+                </Canvas>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

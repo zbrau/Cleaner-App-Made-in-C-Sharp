@@ -1,0 +1,282 @@
+<Window x:Class="AppCleanerPro.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AppCleanerPro"
+        xmlns:conv="clr-namespace:AppCleanerPro.Converters"
+        xmlns:views="clr-namespace:AppCleanerPro.Views"
+        Title="App Cleaner Pro"
+        Height="820" Width="1200"
+        MinWidth="1000" MinHeight="660"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="CanResizeWithGrip"
+        Icon="pack://application:,,,/Assets/app.ico"
+        WindowStartupLocation="CenterScreen">
+
+
+    <!-- All design tokens and styles are defined globally in App.xaml -->
+
+    <!-- ── Root rounded chrome ── -->
+    <Border x:Name="RootBorder" CornerRadius="18" ClipToBounds="True" Background="{DynamicResource BgDeep}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="76"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ══════════════ SIDEBAR ══════════════ -->
+            <Border x:Name="SidebarBorder" Grid.Column="0"
+                    Background="{DynamicResource BgSidebar}"
+                    BorderBrush="{DynamicResource BorderCard}"
+                    BorderThickness="0,0,1,0">
+                <DockPanel>
+
+                    <!-- Logo -->
+                    <Border DockPanel.Dock="Top" Height="72">
+                        <Border x:Name="SidebarLogoBorder" Width="44" Height="44" CornerRadius="13"
+                                HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop x:Name="SidebarLogoGrad0" Color="#4060CC" Offset="0"/>
+                                    <GradientStop x:Name="SidebarLogoGrad1" Color="#211A6B" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Border.Effect>
+                                <DropShadowEffect x:Name="SidebarLogoGlow" Color="#7B9FFF" BlurRadius="14" ShadowDepth="0" Opacity="0.5"/>
+                            </Border.Effect>
+                            <Image Source="pack://application:,,,/Assets/Icons/fi-rr-shield.png"
+                                   Width="26" Height="26"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                        </Border>
+                    </Border>
+
+                    <!-- Window controls at bottom -->
+                    <StackPanel DockPanel.Dock="Bottom"
+                                HorizontalAlignment="Center" Margin="0,0,0,18">
+                        <Button Style="{StaticResource WinDot}" Background="#FF5F57"
+                                ToolTip="Cerrar" Click="CloseBtn_Click" Margin="0,0,0,6"/>
+                        <Button Style="{StaticResource WinDot}" Background="#FFBD2E"
+                                ToolTip="Minimizar" Click="MinBtn_Click" Margin="0,0,0,6"/>
+                        <Button Style="{StaticResource WinDot}" Background="#28CA42"
+                                ToolTip="Maximizar" Click="MaxBtn_Click"/>
+                    </StackPanel>
+
+                    <!-- Admin badge -->
+                    <Border DockPanel.Dock="Bottom" Margin="8,0,8,8">
+                        <Border x:Name="AdminBadge" CornerRadius="8" Padding="6,4" Background="#1A2820">
+                            <TextBlock x:Name="AdminText" Text="ADMIN"
+                                       FontFamily="Segoe UI" FontSize="8" FontWeight="Bold"
+                                       Foreground="{StaticResource AccentGreen}"
+                                       HorizontalAlignment="Center"/>
+                        </Border>
+                    </Border>
+
+                    <!-- Nav group: Phase 1 -->
+                    <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Hidden" PanningMode="VerticalOnly" Margin="0,4,0,0">
+                        <Grid x:Name="NavContainer" HorizontalAlignment="Center">
+
+                            <!-- ── Animated Sliding Active Indicator Box ── -->
+                            <Border x:Name="NavIndicator"
+                                    Width="52" Height="52"
+                                    CornerRadius="13"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    IsHitTestVisible="False">
+                                <Border.RenderTransform>
+                                    <TranslateTransform x:Name="NavIndicatorTransform" Y="0"/>
+                                </Border.RenderTransform>
+                                <Border.Background>
+                                    <SolidColorBrush x:Name="NavIndicatorBg" Color="#1D2545"/>
+                                </Border.Background>
+                                <Border.BorderBrush>
+                                    <SolidColorBrush x:Name="NavIndicatorBorder" Color="#7B9FFF"/>
+                                </Border.BorderBrush>
+                                <Border.BorderThickness>
+                                    <Thickness>1.5</Thickness>
+                                </Border.BorderThickness>
+                                <Border.Effect>
+                                    <DropShadowEffect x:Name="NavIndicatorGlow" Color="#7B9FFF" BlurRadius="16" ShadowDepth="0" Opacity="0.55"/>
+                                </Border.Effect>
+                            </Border>
+
+                            <StackPanel x:Name="NavStack" HorizontalAlignment="Center">
+
+                                <!-- Dashboard -->
+                                <RadioButton Style="{StaticResource NavBtn}"
+                                             Tag="Assets/Icons/fi-rr-dashboard.png" Content="Inicio"
+                                             GroupName="Nav" IsChecked="True"
+                                             Checked="NavDashboard_Checked"
+                                             ToolTip="Dashboard" Margin="0,0,0,4"/>
+
+                                <!-- Clean -->
+                                <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-broom.png" Content="Limpiar"
+                                         GroupName="Nav"
+                                         Checked="NavClean_Checked"
+                                         ToolTip="Limpieza de sistema" Margin="0,0,0,4"/>
+
+                            <!-- Divider -->
+                            <Rectangle Height="1" Width="36" Fill="{DynamicResource BorderCard}" Margin="0,4"/>
+
+                            <!-- Phase 2: Analyze Tools -->
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-analyse.png" Content="Analizar" GroupName="Nav"
+                                         Checked="NavAnalyze_Checked" ToolTip="Analizador de Disco" Margin="0,0,0,4"/>
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-data-processing.png" Content="Grandes" GroupName="Nav"
+                                         Checked="NavLargeFiles_Checked" ToolTip="Archivos Gigantes" Margin="0,0,0,4"/>
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-duplicate.png" Content="Clones" GroupName="Nav"
+                                         Checked="NavDuplicates_Checked" ToolTip="Archivos Duplicados" Margin="0,0,0,4"/>
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-chart-tree-map.png" Content="Treemap" GroupName="Nav"
+                                         Checked="NavTreemap_Checked" ToolTip="Disk Treemap" Margin="0,0,0,4"/>
+
+                            <!-- Divider -->
+                            <Rectangle Height="1" Width="36" Fill="{DynamicResource BorderCard}" Margin="0,4"/>
+
+                            <!-- Phase 3: Security & Privacy -->
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-shredder.png" Content="Triturar" GroupName="Nav"
+                                         Checked="NavShredder_Checked" ToolTip="Destructor de Archivos" Margin="0,0,0,4"/>
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-privacy-settings.png" Content="Privacidad" GroupName="Nav"
+                                         Checked="NavPrivacy_Checked" ToolTip="Escáner de Privacidad" Margin="0,0,0,4"/>
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-process.png" Content="Procesos" GroupName="Nav"
+                                         Checked="NavProcess_Checked" ToolTip="Administrador de Procesos" Margin="0,0,0,4"/>
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-network.png" Content="Red/TCP" GroupName="Nav"
+                                         Checked="NavNetwork_Checked" ToolTip="Monitor de Red" Margin="0,0,0,4"/>
+
+                            <!-- Divider -->
+                            <Rectangle Height="1" Width="36" Fill="{DynamicResource BorderCard}" Margin="0,4"/>
+
+                            <!-- Phase 4: Desktop Tools -->
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-power.png" Content="Arranque" GroupName="Nav"
+                                         Checked="NavStartup_Checked" ToolTip="Gestor de Arranque" Margin="0,0,0,4"/>
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-trash.png" Content="Remover" GroupName="Nav"
+                                         Checked="NavUninstaller_Checked" ToolTip="Desinstalador" Margin="0,0,0,4"/>
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-settings-window.png" Content="Registro" GroupName="Nav"
+                                         Checked="NavRegistry_Checked" ToolTip="Limpiador de Registro" Margin="0,0,0,4"/>
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-network-firewall.png" Content="Firewall" GroupName="Nav"
+                                         Checked="NavFirewall_Checked" ToolTip="Reglas de Firewall" Margin="0,0,0,4"/>
+                                         
+                            <!-- Divider -->
+                            <Rectangle Height="1" Width="36" Fill="{DynamicResource BorderCard}" Margin="0,4"/>
+
+                            <!-- Phase 5: Info, History, Settings -->
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-cpu.png" Content="SisInfo" GroupName="Nav"
+                                         Checked="NavSystemInfo_Checked" ToolTip="Información del Sistema" Margin="0,0,0,4"/>
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-order-history.png" Content="Historial" GroupName="Nav"
+                                         Checked="NavHistory_Checked" ToolTip="Historial de Limpieza" Margin="0,0,0,4"/>
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-settings.png" Content="Ajustes" GroupName="Nav"
+                                         Checked="NavSettings_Checked" ToolTip="Configuración" Margin="0,0,0,4"/>
+
+                            <!-- Divider -->
+                            <Rectangle Height="1" Width="36" Fill="{DynamicResource BorderCard}" Margin="0,4"/>
+
+                            <!-- Extras -->
+                            <RadioButton Style="{StaticResource NavBtn}"
+                                         Tag="Assets/Icons/fi-rr-memory.png" Content="RAM" GroupName="Nav"
+                                         Checked="NavRamBooster_Checked" ToolTip="RAM Booster" Margin="0,0,0,4"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+
+                </DockPanel>
+            </Border>
+
+            <!-- ══════════════ MAIN CONTENT ══════════════ -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- ── Header / Titlebar ── -->
+                <Grid Grid.Row="0" Margin="28,0,28,0"
+                      MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock x:Name="HeaderTitle"
+                                   Text="Dashboard"
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   FontSize="18" FontWeight="Bold" FontFamily="Segoe UI"/>
+                        <TextBlock x:Name="HeaderSub"
+                                   Text="Resumen del sistema"
+                                   Foreground="{DynamicResource TextSecond}"
+                                   FontSize="11" FontFamily="Segoe UI"/>
+                    </StackPanel>
+
+                    <!-- Clock -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <TextBlock x:Name="ClockText"
+                                   Foreground="{DynamicResource AccentBlue}"
+                                   FontSize="20" FontWeight="Bold" FontFamily="Segoe UI"
+                                   VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock x:Name="DateText"
+                                   Foreground="{DynamicResource TextSecond}"
+                                   FontSize="11" FontFamily="Segoe UI"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Separator -->
+                <Rectangle Grid.Row="0" Height="1" VerticalAlignment="Bottom"
+                           Fill="{DynamicResource BorderCard}"/>
+
+                <!-- ── Pages ── -->
+                <Grid Grid.Row="1">
+
+                    <!-- DASHBOARD PAGE -->
+                    <views:DashboardView x:Name="PageDashboard" Visibility="Visible"/>
+
+                    <!-- CLEAN PAGE -->
+                    <views:CleanView x:Name="PageClean" Visibility="Collapsed"/>
+
+                    <!-- PHASE 2 PAGES -->
+                    <views:AnalyzerView   x:Name="PageAnalyzer"   Visibility="Collapsed"/>
+                    <views:LargeFilesView x:Name="PageLargeFiles" Visibility="Collapsed"/>
+                    <views:DuplicatesView x:Name="PageDuplicates" Visibility="Collapsed"/>
+                    <views:TreemapView    x:Name="PageTreemap"    Visibility="Collapsed"/>
+
+                    <!-- PHASE 3 PAGES -->
+                    <views:ShredderView       x:Name="PageShredder"       Visibility="Collapsed"/>
+                    <views:PrivacyView        x:Name="PagePrivacy"        Visibility="Collapsed"/>
+                    <views:ProcessManagerView x:Name="PageProcess"        Visibility="Collapsed"/>
+                    <views:NetworkMonitorView x:Name="PageNetwork"        Visibility="Collapsed"/>
+
+                    <!-- PHASE 4 PAGES -->
+                    <views:StartupView        x:Name="PageStartup"        Visibility="Collapsed"/>
+                    <views:UninstallerView    x:Name="PageUninstaller"    Visibility="Collapsed"/>
+                    <views:RegistryView       x:Name="PageRegistry"       Visibility="Collapsed"/>
+                    <views:FirewallView       x:Name="PageFirewall"       Visibility="Collapsed"/>
+
+                    <!-- PHASE 5 PAGES -->
+                    <views:SystemInfoView     x:Name="PageSystemInfo"     Visibility="Collapsed"/>
+                    <views:HistoryView        x:Name="PageHistory"        Visibility="Collapsed"/>
+                    <views:SettingsView       x:Name="PageSettings"       Visibility="Collapsed"/>
+
+                    <!-- EXTRAS -->
+                    <views:RamBoosterView     x:Name="PageRamBooster"     Visibility="Collapsed"/>
+
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

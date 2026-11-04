@@ -1,0 +1,53 @@
+<UserControl x:Class="AppCleanerPro.Views.HistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock FontSize="28" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,20">
+            <InlineUIContainer><Image Source="pack://application:,,,/Assets/Icons/fi-rr-order-history.png" Width="18" Height="18" VerticalAlignment="Center"/></InlineUIContainer>
+            <Run Text=" Historial de Limpieza"/>
+        </TextBlock>
+
+        <!-- History List -->
+        <Border Grid.Row="1" CornerRadius="12" Background="{DynamicResource BgCard}" BorderBrush="{DynamicResource BorderCard}" BorderThickness="1" Padding="20">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock x:Name="NoHistoryText" Text="Aún no hay registros de limpieza previa." 
+                               Foreground="{DynamicResource TextSecond}" FontSize="16" FontFamily="Segoe UI" 
+                               HorizontalAlignment="Center" Margin="0,30,0,0" Visibility="Collapsed"/>
+                    
+                    <ItemsControl x:Name="HistoryList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="0,0,0,10" CornerRadius="8" Background="{DynamicResource BgCardHov}" BorderBrush="{DynamicResource BorderCard}" BorderThickness="1" Padding="15">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Image Grid.Column="0" Source="pack://application:,,,/Assets/Icons/fi-rr-order-history.png" Width="14" Height="14" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                        
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0">
+                                            <TextBlock Text="Limpieza del Sistema Completa" Foreground="{DynamicResource TextPrimary}" FontSize="14" FontWeight="SemiBold"/>
+                                            <TextBlock Text="{Binding Date}" Foreground="{DynamicResource TextSecond}" FontSize="12" Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                        
+                                        <TextBlock Grid.Column="2" Text="{Binding SizeStr}" Foreground="{DynamicResource AccentGreen}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

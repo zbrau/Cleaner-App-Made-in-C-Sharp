@@ -1,0 +1,68 @@
+<UserControl x:Class="AppCleanerPro.Views.NetworkMonitorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="Transparent" Loaded="UserControl_Loaded">
+    <Grid Margin="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock FontSize="28" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,20">
+            <InlineUIContainer><Image Source="pack://application:,,,/Assets/Icons/fi-rr-network.png" Width="18" Height="18" VerticalAlignment="Center"/></InlineUIContainer>
+            <Run Text=" Monitor de Red (TCP/UDP)"/>
+        </TextBlock>
+
+        <!-- Controls -->
+        <Border Grid.Row="1" CornerRadius="12" Background="{DynamicResource BgCard}" BorderBrush="{DynamicResource BorderCard}" BorderThickness="1" Padding="20" Margin="0,0,0,20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Muestra las conexiones activas en tiempo real. Presiona Actualizar." Foreground="{DynamicResource TextSecond}" VerticalAlignment="Center"/>
+                <Button Grid.Column="1" Content="Actualizar" Width="100" Height="35" Click="RefreshBtn_Click" Style="{StaticResource ActionButton}"/>
+            </Grid>
+        </Border>
+
+        <!-- Grid -->
+        <Border Grid.Row="2" CornerRadius="12" Background="{DynamicResource BgCard}" BorderBrush="{DynamicResource BorderCard}" BorderThickness="1" Padding="10">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="NetList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{DynamicResource BgCardHov}" BorderBrush="{DynamicResource BorderCard}" BorderThickness="1" CornerRadius="8" Margin="0,2,0,4" Padding="15,10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <TextBlock Grid.Column="0" Text="{Binding Protocol}" Foreground="{DynamicResource AccentBlue}" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    
+                                    <StackPanel Grid.Column="1" Margin="10,0,10,0">
+                                        <TextBlock Text="Local" Foreground="{DynamicResource TextSecond}" FontSize="11" Margin="0,0,0,2"/>
+                                        <TextBlock Text="{Binding LocalAddress}" Foreground="{DynamicResource TextPrimary}" FontSize="13" FontFamily="Consolas"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2" Margin="10,0,10,0">
+                                        <TextBlock Text="Remoto" Foreground="{DynamicResource TextSecond}" FontSize="11" Margin="0,0,0,2"/>
+                                        <TextBlock Text="{Binding RemoteAddress}" Foreground="{DynamicResource TextPrimary}" FontSize="13" FontFamily="Consolas"/>
+                                    </StackPanel>
+                                    
+                                    <TextBlock Grid.Column="3" Text="{Binding State}" 
+                                               Foreground="{DynamicResource AccentViolet}" FontWeight="Bold" VerticalAlignment="Center" Width="100" TextAlignment="Right" Margin="0,0,10,0"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

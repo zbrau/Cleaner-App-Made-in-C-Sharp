@@ -1,0 +1,29 @@
+## Build and Binary Output
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+
+## Visual Studio, Rider & VS Code
+.vs/
+.vscode/
+.idea/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.sln.docstates
+
+## Logs, Caches & Generated Runtime Data
+*.log
+*.tmp
+*.cache
+build.log
+clean_history.json
+
+## Certificates with Private Keys
+*.pfx
+*.p12
+
+## Raw third-party icon bundle (app uses Assets/Icons/)
+uicons-regular-rounded/

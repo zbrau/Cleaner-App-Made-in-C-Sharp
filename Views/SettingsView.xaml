@@ -1,0 +1,259 @@
+<UserControl x:Class="AppCleanerPro.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,20,28,28">
+        <StackPanel MaxWidth="860" HorizontalAlignment="Left">
+
+            <!-- ── Header ── -->
+            <StackPanel Margin="0,0,0,24">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                    <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource BgCardHov}"
+                            BorderBrush="{DynamicResource BorderCard}" BorderThickness="1" Margin="0,0,12,0">
+                        <Image Source="pack://application:,,,/Assets/Icons/fi-rr-settings.png"
+                               Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Border>
+                    <TextBlock Text="Configuración" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold"
+                               Foreground="{DynamicResource TextPrimary}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock Text="Personaliza el comportamiento, automatización y estética visual de AppCleaner Pro"
+                           Foreground="{DynamicResource TextSecond}" FontFamily="Segoe UI" FontSize="13"/>
+            </StackPanel>
+
+            <!-- ── Card 1: Automatización y Seguridad ── -->
+            <Border CornerRadius="14" Background="{DynamicResource BgCard}" BorderBrush="{DynamicResource BorderCard}" BorderThickness="1"
+                    Padding="22,18" Margin="0,0,0,18">
+                <StackPanel>
+                    <TextBlock Text="AUTOMATIZACIÓN Y SEGURIDAD" Foreground="{DynamicResource AccentBlue}"
+                               FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Margin="0,0,0,16"/>
+
+                    <!-- Row 1: Auto Scan -->
+                    <Grid Margin="0,0,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                            <TextBlock Text="Escaneo Inteligente al Iniciar" Foreground="{DynamicResource TextPrimary}"
+                                       FontFamily="Segoe UI" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBlock Text="Analiza automáticamente el sistema al abrir la aplicación para tener los datos listos"
+                                       Foreground="{DynamicResource TextSecond}" FontFamily="Segoe UI" FontSize="11" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <CheckBox x:Name="ChkAutoScan" Grid.Column="1" Style="{StaticResource ToggleSwitch}"
+                                  VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Rectangle Height="1" Fill="{DynamicResource BorderCard}" Margin="0,0,0,14"/>
+
+                    <!-- Row 2: Close After Clean -->
+                    <Grid Margin="0,0,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                            <TextBlock Text="Cerrar al Finalizar Limpieza" Foreground="{DynamicResource TextPrimary}"
+                                       FontFamily="Segoe UI" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBlock Text="Cierra la aplicación automáticamente tras realizar una limpieza exitosa"
+                                       Foreground="{DynamicResource TextSecond}" FontFamily="Segoe UI" FontSize="11" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <CheckBox x:Name="ChkCloseAfter" Grid.Column="1" Style="{StaticResource ToggleSwitch}"
+                                  VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Rectangle Height="1" Fill="{DynamicResource BorderCard}" Margin="0,0,0,14"/>
+
+                    <!-- Row 3: Auto Updates -->
+                    <Grid Margin="0,0,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                            <TextBlock Text="Buscar Actualizaciones Automáticamente" Foreground="{DynamicResource TextPrimary}"
+                                       FontFamily="Segoe UI" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBlock Text="Comprueba si existen nuevas versiones de AppCleaner Pro al iniciar"
+                                       Foreground="{DynamicResource TextSecond}" FontFamily="Segoe UI" FontSize="11" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <CheckBox x:Name="ChkUpdates" Grid.Column="1" Style="{StaticResource ToggleSwitch}"
+                                  VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Rectangle Height="1" Fill="{DynamicResource BorderCard}" Margin="0,0,0,14"/>
+
+                    <!-- Row 4: Confirm Deletions -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                            <TextBlock Text="Confirmar Acciones Destructivas" Foreground="{DynamicResource TextPrimary}"
+                                       FontFamily="Segoe UI" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBlock Text="Muestra un diálogo de seguridad antes de eliminar permanentemente o triturar archivos"
+                                       Foreground="{DynamicResource TextSecond}" FontFamily="Segoe UI" FontSize="11" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <CheckBox x:Name="ChkConfirm" Grid.Column="1" Style="{StaticResource ToggleSwitch}"
+                                  VerticalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- ── Card 2: Apariencia y Experiencia ── -->
+            <Border CornerRadius="14" Background="{DynamicResource BgCard}" BorderBrush="{DynamicResource BorderCard}" BorderThickness="1"
+                    Padding="22,18" Margin="0,0,0,24">
+                <StackPanel>
+                    <TextBlock Text="APARIENCIA Y EXPERIENCIA" Foreground="{DynamicResource AccentViolet}"
+                               FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Margin="0,0,0,16"/>
+
+                    <!-- Row 1: Audio Effects -->
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                            <TextBlock Text="Efectos de Audio Hápticos" Foreground="{DynamicResource TextPrimary}"
+                                       FontFamily="Segoe UI" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBlock Text="Reproduce tonos armónicos sintetizados al completar limpiezas o boostear RAM"
+                                       Foreground="{DynamicResource TextSecond}" FontFamily="Segoe UI" FontSize="11" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <CheckBox x:Name="ChkSound" Grid.Column="1" Style="{StaticResource ToggleSwitch}"
+                                  VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Rectangle Height="1" Fill="{DynamicResource BorderCard}" Margin="0,0,0,16"/>
+
+                    <!-- Row 2: Full Application Theme Selector -->
+                    <StackPanel>
+                        <TextBlock Text="Tema Global de la Aplicación" Foreground="{DynamicResource TextPrimary}"
+                                   FontFamily="Segoe UI" FontSize="13" FontWeight="SemiBold"/>
+                        <TextBlock Text="Transforma al instante toda la aplicación (fondos, barra lateral, tarjetas, contrastes y acentos)"
+                                   Foreground="{DynamicResource TextSecond}" FontFamily="Segoe UI" FontSize="11" Margin="0,2,0,14"/>
+
+                        <!-- Palette Tiles -->
+                        <UniformGrid Columns="4" Margin="0,0,0,8">
+
+                            <!-- Option 1: Nova Dark -->
+                            <Border x:Name="ThemeTileNovaDark" CornerRadius="12" Background="#0C101F"
+                                    BorderBrush="#7B9FFF" BorderThickness="1.5"
+                                    Padding="12,12" Margin="0,0,8,0" Cursor="Hand"
+                                    MouseLeftButtonDown="ThemeTile_Click" Tag="NovaDark">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                        <Border Width="16" Height="16" CornerRadius="8" Background="#7B9FFF" Margin="0,0,8,0">
+                                            <Border.Effect>
+                                                <DropShadowEffect Color="#7B9FFF" BlurRadius="6" ShadowDepth="0" Opacity="0.8"/>
+                                            </Border.Effect>
+                                        </Border>
+                                        <TextBlock Text="Nova Dark" Foreground="#E8EEFF" FontFamily="Segoe UI"
+                                                   FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock Text="Oscuro Espacial" Foreground="#7B82A8" FontFamily="Segoe UI" FontSize="10"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Option 2: Nova Light -->
+                            <Border x:Name="ThemeTileNovaLight" CornerRadius="12" Background="#FFFFFF"
+                                    BorderBrush="#252F50" BorderThickness="1"
+                                    Padding="12,12" Margin="0,0,8,0" Cursor="Hand"
+                                    MouseLeftButtonDown="ThemeTile_Click" Tag="NovaLight">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                        <Border Width="16" Height="16" CornerRadius="8" Background="#2563EB" Margin="0,0,8,0">
+                                            <Border.Effect>
+                                                <DropShadowEffect Color="#2563EB" BlurRadius="6" ShadowDepth="0" Opacity="0.8"/>
+                                            </Border.Effect>
+                                        </Border>
+                                        <TextBlock Text="Nova Light" Foreground="#182033" FontFamily="Segoe UI"
+                                                   FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock Text="Blanco Minimal" Foreground="#556382" FontFamily="Segoe UI" FontSize="10"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Option 3: Cyberpunk Neon -->
+                            <Border x:Name="ThemeTileCyberpunk" CornerRadius="12" Background="#140C27"
+                                    BorderBrush="#252F50" BorderThickness="1"
+                                    Padding="12,12" Margin="0,0,8,0" Cursor="Hand"
+                                    MouseLeftButtonDown="ThemeTile_Click" Tag="CyberpunkNeon">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                        <Border Width="16" Height="16" CornerRadius="8" Background="#C084FC" Margin="0,0,8,0">
+                                            <Border.Effect>
+                                                <DropShadowEffect Color="#C084FC" BlurRadius="6" ShadowDepth="0" Opacity="0.8"/>
+                                            </Border.Effect>
+                                        </Border>
+                                        <TextBlock Text="Cyberpunk" Foreground="#F5EDFF" FontFamily="Segoe UI"
+                                                   FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock Text="Púrpura Neón" Foreground="#A999C7" FontFamily="Segoe UI" FontSize="10"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Option 4: Emerald Matrix -->
+                            <Border x:Name="ThemeTileEmerald" CornerRadius="12" Background="#091813"
+                                    BorderBrush="#252F50" BorderThickness="1"
+                                    Padding="12,12" Cursor="Hand"
+                                    MouseLeftButtonDown="ThemeTile_Click" Tag="EmeraldMatrix">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                        <Border Width="16" Height="16" CornerRadius="8" Background="#34D399" Margin="0,0,8,0">
+                                            <Border.Effect>
+                                                <DropShadowEffect Color="#34D399" BlurRadius="6" ShadowDepth="0" Opacity="0.8"/>
+                                            </Border.Effect>
+                                        </Border>
+                                        <TextBlock Text="Emerald" Foreground="#EDFDF5" FontFamily="Segoe UI"
+                                                   FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock Text="Verde Stealth" Foreground="#7CD4B1" FontFamily="Segoe UI" FontSize="10"/>
+                                </StackPanel>
+                            </Border>
+                        </UniformGrid>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- ── Actions Bar ── -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Width="210" Height="42" Click="SaveBtn_Click" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="BtnBd" CornerRadius="11">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#4060CC" Offset="0"/>
+                                        <GradientStop Color="#2A409A" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border.Effect>
+                                    <DropShadowEffect Color="#4060CC" BlurRadius="16" ShadowDepth="0" Opacity="0.45"/>
+                                </Border.Effect>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="pack://application:,,,/Assets/Icons/fi-rr-settings.png"
+                                           Width="15" Height="15" Margin="0,0,8,0" VerticalAlignment="Center"
+                                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    <TextBlock Text="GUARDAR CAMBIOS" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold"
+                                               Foreground="White" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="BtnBd" Property="Opacity" Value="0.88"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Border x:Name="SavedBadge" CornerRadius="8" Background="#065F46" Margin="16,0,0,0"
+                        Padding="14,8" Visibility="Collapsed" VerticalAlignment="Center">
+                    <TextBlock Text="✓ ¡Configuración guardada exitosamente!" Foreground="#34D399"
+                               FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold"/>
+                </Border>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
